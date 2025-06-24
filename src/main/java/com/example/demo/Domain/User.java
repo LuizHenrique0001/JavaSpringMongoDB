@@ -53,9 +53,6 @@ public class User {
         return created_at;
     }
 
-    public void setCreated_at(Instant created_at) {
-        this.created_at = created_at;
-    }
 
     public Boolean getStatus() {
         return status;
