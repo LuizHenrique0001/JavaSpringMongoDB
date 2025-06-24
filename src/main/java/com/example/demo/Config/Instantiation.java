@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Instant;
 import java.util.Arrays;
 @Configuration
 public class Instantiation implements CommandLineRunner {
@@ -17,9 +18,9 @@ public class Instantiation implements CommandLineRunner {
 
         userRepository.deleteAll();
 
-        User maria = new User(null, "Maria Brown", "maria@gmail.com");
-        User alex = new User(null, "Alex Green", "alex@gmail.com");
-        User bob = new User(null, "Bob Grey", "bob@gmail.com");
+        User maria = new User(null, "Maria Brown", "maria@gmail.com", Instant.now(), true);
+        User alex = new User(null, "Alex Green", "alex@gmail.com", Instant.now(), true);
+        User bob = new User(null, "Bob Grey", "bob@gmail.com", Instant.now(), false);
 
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 

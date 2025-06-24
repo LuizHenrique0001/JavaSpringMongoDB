@@ -3,6 +3,7 @@ package com.example.demo.Domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.util.Objects;
 @Document(collection = "user")
 public class User {
@@ -10,14 +11,18 @@ public class User {
     private String id;
     private String name;
     private String email;
+    private Instant created_at;
+    private Boolean status;
 
     public User() {
     }
 
-    public User(String id, String name, String email) {
+    public User(String id, String name, String email, Instant created_at, Boolean status) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.created_at = created_at;
+        this.status = status;
     }
 
     public String getId() {
@@ -42,6 +47,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Instant getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Instant created_at) {
+        this.created_at = created_at;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     @Override
