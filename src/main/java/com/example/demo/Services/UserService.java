@@ -38,4 +38,11 @@ public class UserService {
         obj.setStatus(false);
         userRepository.save(obj);
     }
+
+    public void update(String id, UserDTO userDTO){
+        User obj = findById(id);
+        obj.setName(userDTO.getName());
+        obj.setEmail(userDTO.getEmail());
+        userRepository.save(obj);
+    }
 }
