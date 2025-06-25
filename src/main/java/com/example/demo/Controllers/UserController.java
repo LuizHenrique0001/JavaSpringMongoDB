@@ -3,10 +3,14 @@ package com.example.demo.Controllers;
 import com.example.demo.Domain.User;
 import com.example.demo.Dto.UserDTO;
 import com.example.demo.Services.UserService;
+import jakarta.servlet.Servlet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +35,14 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> save(@RequestBody UserDTO userDTO){
-        return ResponseEntity.status(201).body(userService.save(userService.fromDTO(userDTO)));
+       User obj = userService.save(userService.fromDTO(userDTO));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> delete(@PathVariable String id){
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

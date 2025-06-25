@@ -17,7 +17,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> findAll(){
-        return userRepository.findAll();
+        return userRepository.findByStatus(true);
     }
 
     public User findById(String id){
@@ -31,5 +31,11 @@ public class UserService {
 
     public User fromDTO(UserDTO userDTO){
         return new User(null, userDTO.getName(), userDTO.getEmail(), Instant.now(), true);
+    }
+
+    public void delete(String id){
+        User obj = findById(id);
+        obj.setStatus(false);
+        userRepository.save(obj);
     }
 }
