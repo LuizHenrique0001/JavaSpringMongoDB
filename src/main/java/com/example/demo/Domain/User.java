@@ -1,9 +1,12 @@
 package com.example.demo.Domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 @Document(collection = "user")
 public class User {
@@ -11,6 +14,9 @@ public class User {
     private String id;
     private String name;
     private String email;
+
+    @DBRef(lazy = true )
+    private List<Post> post = new ArrayList<>();
     private Instant created_at;
     private Boolean status;
 
@@ -53,13 +59,16 @@ public class User {
         return created_at;
     }
 
+    public void setStatus(Boolean status){
+        this.status = status;
+    }
+
+    public List<Post> getPost() {
+        return post;
+    }
 
     public Boolean getStatus() {
         return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
 
     @Override
