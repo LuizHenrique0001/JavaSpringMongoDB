@@ -1,13 +1,16 @@
 package com.example.demo.Domain;
 
 import com.example.demo.Dto.AuthorDTO;
+import com.example.demo.Dto.CommentDTO;
 import com.example.demo.Dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -19,6 +22,7 @@ public class Post {
     private String title;
     private String body;
     private AuthorDTO author;
+    private List<CommentDTO> comments = new ArrayList<>();
 
     public Post() {
     }
@@ -65,6 +69,10 @@ public class Post {
 
     public AuthorDTO getAuthor() {
         return author;
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
     }
 
     @Override
